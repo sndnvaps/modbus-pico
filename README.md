@@ -13,7 +13,7 @@ For detailes on the library usage visit [documentation](documentation) section.
  - ModbusRTU_PICO.h for usb-serial or serial-ttl connect
  - ModbusIP_PICO.h for WiFi connect, use WiFi.h on Arduino-pico(for Picow & pico2w)
  - ModbusEthernet.h for Ethernet v2 support (not work for lwip-ethernet by my test)
- - ModbusTLS.h for WiFi tls connect may be work
+ - ModbusTLS.h for WiFi tls connect
 
 
 ## Example
@@ -70,9 +70,9 @@ void loop() {
 * Operates in any combination of multiple instances of
   * [Modbus RTU server](examples/RTU)
   * [Modbus RTU client](examples/RTU)
-  * Modbus TCP server for [ESP8266/ESP32](examples/TCP-ESP) and [Ethernet library](examples/TCP-Ethernet)
+  * Modbus TCP server for [PICO](examples/TCP) and [Ethernet library](examples/TCP-Ethernet)
   * Modbus TCP client for [ESP8266/ESP32](examples/TCP-ESP) and [Ethernet library](examples/TCP-Ethernet)
-  * [MODBUS/TCP Security server (ESP8266)](examples/TLS)
+  * [MODBUS/TCP Security server (PICO)](examples/TLS)
   * [MODBUS/TCP Security client (ESP8266/ESP32)](examples/TLS)
 * Modbus functions supported:
   * 0x01 - Read Coils
