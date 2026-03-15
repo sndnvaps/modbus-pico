@@ -37,7 +37,7 @@ Also note STL issue workaround code in Modbus.cpp
 #define MODBUS_USE_STL
 If defined C STL will be used.
 */
-#if defined(ESP8266) || defined(ESP32) || defined(ARDUINO_ARCH_STM32) || defined(ARDUINO_SAM_DUE_STL)|| defined(PICO_RP2040) || defined(PICO_RP2350) 
+#if defined(ESP8266) || defined(ESP32) || defined(ARDUINO_ARCH_STM32) || defined(ARDUINO_SAM_DUE_STL) || defined(PICO_RP2040) || defined(PICO_RP2350) 
 #define MODBUS_USE_STL
 #endif
 
@@ -48,12 +48,12 @@ If defined regisers count will be limited.
 // Add limitation for specific STL implementation
 #if defined(MODBUS_USE_STL) && (defined(ESP8266) || defined(ESP32) || defined(PICO_RP2040) || defined(PICO_RP2350))
 #undef MODBUS_MAX_REGS
-#define MODBUS_MAX_REGS     4000
+#define MODBUS_MAX_REGS     32
 #endif
 
 #define MODBUS_ADD_REG
 //#define MODBUS_STRICT_REG
-#define MODBUS_MAX_FRAME   256
+#define MODBUS_MAX_FRAME   128
 //#define MODBUS_STATIC_FRAME
 #define MODBUS_MAX_WORDS 0x007D
 #define MODBUS_MAX_BITS 0x07D0
@@ -72,17 +72,18 @@ ESP32 only. Outgoing connection attempt timeout
 #define MODBUSIP_TIMEOUT 1000
 //#define MODBUSIP_CONNECT_TIMEOUT 1000
 
-#define MODBUSIP_UNIT	  255
+#define MODBUSIP_UNIT	  1
 #define MODBUSIP_MAX_TRANSACTIONS 16
-#if defined(ESP32) || defined(PICO_RP2040) || defined(PICO_RP2350) 
+#if defined(ESP32)
 #define MODBUSIP_MAX_CLIENTS    8
-#else
+#else //|| defined(PICO_RP2040) || defined(PICO_RP2350) 
 #define MODBUSIP_MAX_CLIENTS    4
 #endif
 #define MODBUSIP_UNIQUE_CLIENTS
 #define MODBUSIP_MAX_READMS 100
 #define MODBUSIP_FULL
-//#define MODBUSIP_DEBUG
+
+#define MODBUSIP_DEBUG 1
 /*
 Allows to use DNS names as target
 Otherwise IP addresses only must be used

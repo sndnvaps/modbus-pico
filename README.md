@@ -7,7 +7,14 @@ For detailes on the library usage visit [documentation](documentation) section.
 
 ## This project now port to support Raspberry PICO(rp2040/rp2350)
 
-## for PICO, just port ModbusRTU ,not port TCP
+## for PICO,  port ModbusRTU ,ModbusTCP, ModbusEthernet
+
+
+ - ModbusRTU_PICO.h for usb-serial or serial-ttl connect
+ - ModbusIP_PICO.h for WiFi connect, use WiFi.h on Arduino-pico(for Picow & pico2w)
+ - ModbusEthernet.h for Ethernet v2 support (not work for lwip-ethernet by my test)
+ - ModbusTLS.h for WiFi tls connect may be work
+
 
 ## Example
 
