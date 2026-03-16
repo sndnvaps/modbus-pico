@@ -15,16 +15,7 @@
 #include "ModbusAPI.h"
 #include "ModbusTCPTemplate.h"
 
-/*
-class WiFiServerESPWrapper : public WiFiServer {
-  public:
-    WiFiServerESPWrapper(uint16_t port) : WiFiServer(port) {}
-    inline WiFiClient accept() {
-        return accept();
-    }
-};
-
-class ModbusTCP : public ModbusAPI<ModbusTCPTemplate<WiFiServerESPWrapper, WiFiClient>> {
+class ModbusTCP : public ModbusAPI<ModbusTCPTemplate<WiFiServer, WiFiClient>> {
 #if defined(MODBUSIP_USE_DNS)
   private:
     static IPAddress resolver(const char *host) {
@@ -40,7 +31,5 @@ class ModbusTCP : public ModbusAPI<ModbusTCPTemplate<WiFiServerESPWrapper, WiFiC
     }
 #endif
 };
-*/
-class ModbusTCP : public ModbusAPI<ModbusTCPTemplate<WiFiServer, WiFiClient>> {
-};
+
 

@@ -5,7 +5,7 @@ For detailes on the library usage visit [documentation](documentation) section.
 
 ## Features
 
-## This project now port to support Raspberry PICO(rp2040/rp2350)
+## This project now port to support Raspberry PICO/PICOW/PICO2W...(rp2040/rp2350)
 
 ## for PICO,  port ModbusRTU ,ModbusTCP, ModbusEthernet
 
@@ -13,7 +13,7 @@ For detailes on the library usage visit [documentation](documentation) section.
  - ModbusRTU_PICO.h for usb-serial or serial-ttl connect
  - ModbusIP_PICO.h for WiFi connect, use WiFi.h on Arduino-pico(for Picow & pico2w)
  - ModbusEthernet.h for Ethernet v2 support (not work for lwip-ethernet by my test)
- - ModbusTLS.h for WiFi tls connect
+ - ModbusTLS.h for WiFi tls connect, use WiFi.h on Arduino-pico(for Picow & pico2w)
 
 
 ## Example
@@ -71,9 +71,9 @@ void loop() {
   * [Modbus RTU server](examples/RTU)
   * [Modbus RTU client](examples/RTU)
   * Modbus TCP server for [PICO](examples/TCP) and [Ethernet library](examples/TCP-Ethernet)
-  * Modbus TCP client for [ESP8266/ESP32](examples/TCP-ESP) and [Ethernet library](examples/TCP-Ethernet)
+  * Modbus TCP client for [PICOW/PICO2W](examples/TCP-PICO) and [Ethernet library](examples/TCP-Ethernet)
   * [MODBUS/TCP Security server (PICO)](examples/TLS)
-  * [MODBUS/TCP Security client (ESP8266/ESP32)](examples/TLS)
+  * [MODBUS/TCP Security client (PICOW/PICO2W)](examples/TLS)
 * Modbus functions supported:
   * 0x01 - Read Coils
   * 0x02 - Read Input Status (Read Discrete Inputs)
