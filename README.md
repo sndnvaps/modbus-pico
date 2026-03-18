@@ -7,13 +7,14 @@ For detailes on the library usage visit [documentation](documentation) section.
 
 ## This project now port to support Raspberry PICO/PICOW/PICO2W...(rp2040/rp2350)
 
-## for PICO,  port ModbusRTU ,ModbusTCP, ModbusEthernet
+## for PICO,  port ModbusRTU ,ModbusTCP, ModbusEthernet，ModbusLWIP_Ethernet(only for android-pico project)
 
 
  - ModbusRTU_PICO.h for usb-serial or serial-ttl connect
  - ModbusIP_PICO.h for WiFi connect, use WiFi.h on Arduino-pico(for Picow & pico2w)
- - ModbusEthernet.h for Ethernet v2 support (not work for lwip-ethernet by my test)
  - ModbusTLS.h for WiFi tls connect, use WiFi.h on Arduino-pico(for Picow & pico2w)
+ - ModbusEthernet.h for Ethernet v2 support
+ - ModbusLWIP_Ethernet.h for Raspberry Pico's lwip-ethernet
 
 
 ## Example
@@ -71,7 +72,9 @@ void loop() {
   * [Modbus RTU server](examples/RTU)
   * [Modbus RTU client](examples/RTU)
   * Modbus TCP server for [PICO](examples/TCP) and [Ethernet library](examples/TCP-Ethernet)
+  * Modbus TCP server for [LWIP-Ethernet library](examples/TCP-LWIP-Ethernet)
   * Modbus TCP client for [PICOW/PICO2W](examples/TCP-PICO) and [Ethernet library](examples/TCP-Ethernet)
+  * Modbus TCP client for [LWIP-Ethernet library](examples/TCP-LWIP-Ethernet) 
   * [MODBUS/TCP Security server (PICO)](examples/TLS)
   * [MODBUS/TCP Security client (PICOW/PICO2W)](examples/TLS)
 * Modbus functions supported:
