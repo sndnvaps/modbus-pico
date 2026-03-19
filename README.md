@@ -1,4 +1,4 @@
-# Modbus Library for Arduino
+# Modbus Library for Arduino-PICO rp2040/rp2350
 ### ModbusRTU
 
 For detailes on the library usage visit [documentation](documentation) section.
@@ -14,7 +14,7 @@ For detailes on the library usage visit [documentation](documentation) section.
  - ModbusIP_PICO.h for WiFi connect, use WiFi.h on Arduino-pico(for Picow & pico2w)
  - ModbusTLS.h for WiFi tls connect, use WiFi.h on Arduino-pico(for Picow & pico2w)
  - ModbusEthernet.h for Ethernet v2 support
- - ModbusLWIP_Ethernet.h for Raspberry Pico's lwip-ethernet
+ - ModbusLWIP_Ethernet.h for Raspberry Pico's lwip-ethernet，use EthernetCompat.h
 
 
 ## Example
@@ -92,7 +92,7 @@ void loop() {
   * 0x17 - Read/Write multiple registers
 * [Callbacks](examples/Callback) driven design
 * Real life complex examples:
-  * [ESP8266/ESP32 firmware update over Modbus](examples/Files)
+  * [PICO/PICOW/PICO2W firmware update over Modbus](examples/Files)
   * [ModbusRTU to ModbusTCP bridge](examples/bridge)
 
 ## Notes
