@@ -1,24 +1,19 @@
 # Modbus Library for Arduino-PICO rp2040/rp2350
-### ModbusRTU
+### Modbus-pico
 
 For detailes on the library usage visit [documentation](documentation) section.
 
 ## Features
 
-## This project now port to support Raspberry PICO/PICOW/PICO2W...(rp2040/rp2350)
-
-## for PICO,  port ModbusRTU ,ModbusTCP, ModbusEthernet，ModbusLWIP_Ethernet(only for android-pico project)
-
-
  - ModbusRTU_PICO.h for usb-serial or serial-ttl connect
  - ModbusIP_PICO.h for WiFi connect, use WiFi.h on Arduino-pico(for Picow & pico2w)
  - ModbusTLS.h for WiFi tls connect, use WiFi.h on Arduino-pico(for Picow & pico2w)
  - ModbusEthernet.h for Ethernet v2 support
- - ModbusLWIP_Ethernet.h for Raspberry Pico's lwip-ethernet，use EthernetCompat.h
+ - ModbusLWIP_Ethernet.h for Raspberry Pico's lwip-ethernet,use EthernetCompat.h
  - ModbusLWIP_TLS_Ethernet.h for Raspberry Pico's lwip-ethernet, connect modbus master/slave with MODBUS/TCP Security
 
-
 * Supports all rp2040/rp2350 devices
+
 * Operates in any combination of multiple instances of
   * [Modbus RTU server](examples/RTU)
   * [Modbus RTU client](examples/RTU)
@@ -123,11 +118,14 @@ For more information about Modbus see:
 ```
 ## Contributions
 
+https://github.com/sndnvaps/modbus-pico
+
+
+Original version:
+
 https://github.com/emelianov/modbus-esp8266
 
 a.m.emelianov@gmail.com
-
-Original version:
 
 https://github.com/andresarmento/modbus-esp8266
 
