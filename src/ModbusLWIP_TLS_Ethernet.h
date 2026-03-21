@@ -1,35 +1,45 @@
 /*
-    Modbus Library for Arduino
-    ModbusTLS - ModbusTCP Security for ESP8266
-    Copyright (C) 2020 Alexander Emelianov (a.m.emelianov@gmail.com)
-    modified to support Raspberry PICOW/PICO2W
+    Modbus Library for Arduino-pico rp2040/rp2350
+    ModbusTCP for W5x00 Ethernet
+    Copyright (C) 2022 Alexander Emelianov (a.m.emelianov@gmail.com)
     Copyright (C) 2026 Jimes Yang (admin@sndnvaps.com)
 */
+
 #pragma once
+#if defined(MODBUSIP_USE_DNS)
+#include <Dns.h>
+#endif
+
+#if !defined(PICO_RP2040) && !defined(PICO_RP2350)
+#error Unsupported architecture
+#endif
 
 #include <WiFiClientSecure.h>
 #include <WiFiServerSecure.h>
 
-#include "ModbusTCPTemplate.h"
 #include "ModbusAPI.h"
+#include "ModbusTCPTemplate.h"
 
-class ModbusTLS : public ModbusAPI<ModbusTCPTemplate<WiFiServerSecure, WiFiClientSecure>> {
+#include <EthernetCompat.h> //for LWIP-Ethernet
+
+using EthernetServerTLS = WiFiServerSecure;
+using EthernetClientTLS = WiFiClientSecure;
+
+
+class ModbusEthernetTLS : public ModbusAPI<ModbusTCPTemplate<EthernetServerTLS, EthernetClientTLS>> {
     private:
     int8_t _connect(IPAddress ip, uint16_t port, const char* client_cert = nullptr, const char* client_private_key = nullptr) {
 	    int8_t p = getFreeClient();
 	    if (p < 0)
 		    return p;
-	    tcpclient[p] = new WiFiClientSecure();
+	    tcpclient[p] = new EthernetClientTLS();
         BIT_CLEAR(tcpServerConnection, p);
-        #if defined(PICO_RP2040) || defined(PICO_RP2350)
+
         BearSSL::X509List *clientCertList = new BearSSL::X509List(client_cert);
         BearSSL::PrivateKey *clientPrivKey = new BearSSL::PrivateKey(client_private_key);
         tcpclient[p]->setClientRSACert(clientCertList, clientPrivKey);
         tcpclient[p]->setBufferSizes(512, 512);
-        #else
-        tcpclient[p]->setCertificate(client_cert);
-        tcpclient[p]->setPrivateKey(client_private_key);
-        #endif
+
         return p;
     }
 #if defined(MODBUSIP_USE_DNS)
@@ -41,16 +51,16 @@ class ModbusTLS : public ModbusAPI<ModbusTCPTemplate<WiFiServerSecure, WiFiClien
     }
 #endif
     public:
-    ModbusTLS() : ModbusAPI() {
+    ModbusEthernetTLS() : ModbusAPI() {
         defaultPort = MODBUSTLS_PORT;
 #if defined(MODBUSIP_USE_DNS)
         resolve = resolver;
 #endif
     }
-    #if defined(PICO_RP2040) || defined(PICO_RP2350)
+
 	void server(uint16_t port, const char* server_cert = nullptr, const char* server_private_key = nullptr, const char* ca_cert = nullptr) {
         serverPort = port;
-	    tcpserver = new WiFiServerSecure(serverPort);
+	    tcpserver = new EthernetServerTLS(serverPort);
         BearSSL::X509List *serverCertList = new BearSSL::X509List(server_cert);
         BearSSL::PrivateKey *serverPrivKey = new BearSSL::PrivateKey(server_private_key);
         tcpserver->setRSACert(serverCertList, serverPrivKey);
@@ -71,7 +81,7 @@ class ModbusTLS : public ModbusAPI<ModbusTCPTemplate<WiFiServerSecure, WiFiClien
         return tcpclient[p]->connect(ip, port);
     }
 
-    #endif
+
 #if defined(MODBUSIP_USE_DNS)
     bool connect(String host, uint16_t port, const char* client_cert = nullptr, const char* client_private_key = nullptr, const char* ca_cert = nullptr) {
         return connect(resolver(host.c_str()), port, client_cert, client_private_key, ca_cert);
@@ -88,18 +98,14 @@ class ModbusTLS : public ModbusAPI<ModbusTCPTemplate<WiFiServerSecure, WiFiClien
         int8_t p = _connect(ip, port, client_cert, client_private_key);
         if (p < 0)
             return false;
-        #if defined(PICO_RP2040) || defined(PICO_RP2350)
+
         if (ca_cert) {
             BearSSL::X509List *trustedCA = new BearSSL::X509List(ca_cert);
             tcpclient[p]->setTrustAnchors(trustedCA);
         } else {
             tcpclient[p]->setInsecure();
         }
-        #else
-        if (ca_cert) {
-            tcpclient[p]->setCACert(ca_cert);
-        }
-        #endif
+
         //return tcpclient[p]->connect(ip, port);
         if (!tcpclient[p]->connect(ip, port))
             return false;

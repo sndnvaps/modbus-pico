@@ -12,13 +12,17 @@ ModbusTCP for PICOW/PICO2W client and server examples
 
 ModbusTCP for W5x00 Ethernet library client and server examples (for all Arduino-pico).
 
-## [TCP LWIP-Ethernet W5x00](TCP-LWIP-Ethernet)
+## [TCP LWIP-Ethernet W5x00/ENC28J60l](TCP-LWIP-Ethernet)
 
-ModbusTCP for W5x00 LWIP-Ethernet library client and server examples (for all Arduino-pico).
+ModbusTCP for W5x00/ENC28J60l LWIP-Ethernet library client and server examples (for all Arduino-pico).
+
+## [TLS LWIP-Ethernet W5x00](TCP-LWIP-TLS-Ethernet)
+
+ModbusTCP Security for W5x00 LWIP-Ethernet library client and server examples (for all Arduino-pico).
 
 ## [TLS PICOW/PICO2W](TLS)
 
-ModbusTCP Security for ESP8266 and ESP32 (client only) examples.
+ModbusTCP Security for PICOW/PICO2W client and server examples.
 
 ## [Callbacks usage](Callback)
 
@@ -37,6 +41,6 @@ Very basic example of accessing ModbusRTU slave device connected to PICOW/PICO2W
 
 (c)2020 [Alexander Emelianov](mailto:a.m.emelianov@gmail.com)
 
-(c)2026 [Jimes Yang](mailto:admin@sndnvaps.com)
+(C)2026 [Jimes Yang](mailto:admin@sndnvaps.com)
 
 The code in this repo is licensed under the BSD New License. See LICENSE.txt for more info.

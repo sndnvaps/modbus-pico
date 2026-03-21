@@ -8,24 +8,18 @@
 #if defined(MODBUSIP_USE_DNS)
 #include <Dns.h>
 #endif
+
+#if !defined(PICO_RP2040) && !defined(PICO_RP2350)
+#error Unsupported architecture
+#endif
+
 #include "ModbusAPI.h"
 #include "ModbusTCPTemplate.h"
 
 #include <WiFi.h>
 #include <EthernetCompat.h> //for LWIP-Ethernet
 
-// Ethernet class wrapper to be able to compile for ESP32
-/*
-class EthernetServerWrapper : public EthernetServer {
-    public:
-    EthernetServerWrapper(uint16_t port) : EthernetServer(port) {
 
-    }
-    void begin(uint16_t port=0) {
-
-    }
-};
-*/
 class ModbusEthernet : public ModbusAPI<ModbusTCPTemplate<EthernetServer, EthernetClient>> {
 #if defined(MODBUSIP_USE_DNS)
     private:

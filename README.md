@@ -15,59 +15,10 @@ For detailes on the library usage visit [documentation](documentation) section.
  - ModbusTLS.h for WiFi tls connect, use WiFi.h on Arduino-pico(for Picow & pico2w)
  - ModbusEthernet.h for Ethernet v2 support
  - ModbusLWIP_Ethernet.h for Raspberry Pico's lwip-ethernet，use EthernetCompat.h
+ - ModbusLWIP_TLS_Ethernet.h for Raspberry Pico's lwip-ethernet, connect modbus master/slave with MODBUS/TCP Security
 
 
-## Example
-
-```
-//modbusRTU_pico_example.ino
-#include "ModbusRTU_PICO.h"
-
-#define MODBUS_SLAVE_ID 1
-#define REG_TEMPERATURE 0  // 温度×10 寄存器地址
-#define REG_HUMIDITY 1     // 湿度×10 寄存器地址
-
-ModbusRTU mb;
-
-// 模拟温湿度数据（存储在寄存器中）
-uint16_t temperature = 256;  // 25.6℃（放大10倍存储）
-uint16_t humidity = 605;     // 60.5%（放大10倍存储）
-
-void setup() {
-  // 初始化 Modbus 从站
-  Serial.begin(9600, SERIAL_8N1);
-  mb.begin(&Serial);
-  //mb.setBaudrate(9600);
-  mb.slave(MODBUS_SLAVE_ID);
-  mb.addHreg(REG_TEMPERATURE);
-  mb.addHreg(REG_HUMIDITY);
-}
-
-void loop() {
-
-  // 模拟数据更新（每1秒更新一次温湿度）
-  static uint32_t lastUpdate = 0;
-  if (millis() - lastUpdate >= 2000) {
-    lastUpdate = millis();
-    // 温度随机波动±0.5℃
-    temperature = constrain(temperature + (random(-5, 6)), 200, 300);
-    // 湿度随机波动±0.5%
-    humidity = constrain(humidity + (random(-5, 6)), 500, 700);
-    // 更新寄存器
-  
-    mb.Hreg(REG_TEMPERATURE, temperature);
-    mb.Hreg(REG_HUMIDITY, humidity);
-
-    // 调试输出
-    //Serial1.printf("Temperature: %.1f℃, Humidity: %.1f%%\n",
-    //               temperature/10.0, humidity/10.0);
-  }
-  //delay(1);
-  mb.task();
-}
-```
-
-* Supports all Arduino platforms
+* Supports all rp2040/rp2350 devices
 * Operates in any combination of multiple instances of
   * [Modbus RTU server](examples/RTU)
   * [Modbus RTU client](examples/RTU)
@@ -75,8 +26,10 @@ void loop() {
   * Modbus TCP server for [LWIP-Ethernet library](examples/TCP-LWIP-Ethernet)
   * Modbus TCP client for [PICOW/PICO2W](examples/TCP-PICO) and [Ethernet library](examples/TCP-Ethernet)
   * Modbus TCP client for [LWIP-Ethernet library](examples/TCP-LWIP-Ethernet) 
+  * MODBUS/TCP Security server/client for [LWIP-Ethernet library](examples/TCP-LWIP-TLS-Ethernet) 
   * [MODBUS/TCP Security server (PICO)](examples/TLS)
   * [MODBUS/TCP Security client (PICOW/PICO2W)](examples/TLS)
+
 * Modbus functions supported:
   * 0x01 - Read Coils
   * 0x02 - Read Input Status (Read Discrete Inputs)
