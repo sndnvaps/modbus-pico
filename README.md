@@ -17,6 +17,7 @@ For detailes on the library usage visit [documentation](documentation) section.
 * Operates in any combination of multiple instances of
   * [Modbus RTU server](examples/RTU)
   * [Modbus RTU client](examples/RTU)
+  * [Modbus UDP/IP server](examples/UDP)
   * Modbus TCP server for [PICO](examples/TCP) and [Ethernet library](examples/TCP-Ethernet)
   * Modbus TCP server for [LWIP-Ethernet library](examples/TCP-LWIP-Ethernet)
   * Modbus TCP client for [PICOW/PICO2W](examples/TCP-PICO) and [Ethernet library](examples/TCP-Ethernet)

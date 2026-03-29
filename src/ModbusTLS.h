@@ -10,7 +10,13 @@
 #include <WiFiClientSecure.h>
 #include <WiFiServerSecure.h>
 
+#include <WiFiUdp.h>
+
+using EthernetUDP = WiFiUDP;
 #include "ModbusTCPTemplate.h"
+
+
+
 #include "ModbusAPI.h"
 
 class ModbusTLS : public ModbusAPI<ModbusTCPTemplate<WiFiServerSecure, WiFiClientSecure>> {

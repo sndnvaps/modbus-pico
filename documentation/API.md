@@ -8,6 +8,12 @@ Processing routine. Should be periodically called form loop().
 
 ## Server API
 
+### Set the run mode, MODE_TCP, MODE_UDP (not work for client)
+
+```c
+    void setMode(mode_type mode = MODE_TCP);
+```
+
 ### Add registers
 
 ```c

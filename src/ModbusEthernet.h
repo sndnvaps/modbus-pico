@@ -9,6 +9,7 @@
 #include <Dns.h>
 #endif
 #include "ModbusAPI.h"
+
 #include "ModbusTCPTemplate.h"
 
 // Ethernet class wrapper to be able to compile for ESP32

@@ -144,6 +144,7 @@ void setup() {
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
   setClock();
+  
   mb.server(MODBUSTLS_PORT, server_cert, server_private_key, ca_cert);
 
   mb.addHreg(REG_TEMPERATURE);

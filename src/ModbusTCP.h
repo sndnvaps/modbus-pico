@@ -10,10 +10,15 @@
 #include <ESP8266WiFi.h>
 #elif defined(ESP32) || defined(PICO_RP2040) || defined(PICO_RP2350)
 #include <WiFi.h>
+#include <WiFiUdp.h>
 #endif
 
 #include "ModbusAPI.h"
+
+using EthernetUDP = WiFiUDP;
+
 #include "ModbusTCPTemplate.h"
+
 
 class ModbusTCP : public ModbusAPI<ModbusTCPTemplate<WiFiServer, WiFiClient>> {
 #if defined(MODBUSIP_USE_DNS)
